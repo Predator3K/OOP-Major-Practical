@@ -8,7 +8,6 @@ class Ship {
     private:
         int _ShipLength;
         std::string _ShipName;
-        int _ShipNumber;
         int* _ShipData;
         bool _IsSunk;
 
@@ -16,8 +15,8 @@ class Ship {
         //Default constructor
         Ship();
 
-        //Constructor takes a string
-        Ship(std::string name, int number, int length);
+        //Constructor takes a string, boat number and length
+        Ship(std::string name, int length);
 
         //Returns the ship name
         std::string GetName();
@@ -33,6 +32,9 @@ class Ship {
 
         //Allows the game to write in the ships data
         void WriteShipData(int piece, int x, int y);
+
+        //Allows a ship piece to get hit given coordinates
+        void ShipHit(int x, int y);
 
         //Deconstructor
         ~Ship();
