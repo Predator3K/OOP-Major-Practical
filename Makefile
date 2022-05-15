@@ -1,5 +1,5 @@
 BRANCH = Version1
-SRCS = Ship.h Ship.cpp TestShip.cpp Makefile
+SRCS = Ship.h Ship.cpp TestShip.cpp Makefile User.h User.cpp TestUser.cpp Player.h Player.cpp
 CC = g++
 FLAGS = -Wall -Wextra -pedantic -std=c++14
 
