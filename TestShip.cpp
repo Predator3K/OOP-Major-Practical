@@ -24,5 +24,13 @@ int main () {
     Ship* Ships2 = new Ship;
     std::cout << "The ships name is " << Ships2->GetName() << " With length " << Ships2->GetLength() << std::endl;
 
+    for (int i = 0; i < 3; i++) {
+        if (Ships[i].IsSunk() == false) {
+            std::cout << "Ship " << Ships[i].GetName() << " is not sunk" << std::endl;
+        } else {
+            std::cout << "Ship " << Ships[i].GetName() << " is sunk" << std::endl;
+        }
+    }
+
     return 0;
 }

@@ -3,10 +3,15 @@
 Ship::Ship(): _ShipLength(0), _ShipName("Null"), _ShipNumber(0), _ShipData(nullptr), _IsSunk(false) {}
 
 Ship::Ship(std::string name, int number, int length): _ShipLength(length), _ShipName(name), _ShipNumber(number), _IsSunk(false) {
-    _ShipData = new int[length];
 
-    for (int i = 0; i < _ShipLength; i++) {
-        _ShipData[i] = 1000 + (i+1)*100;
+    if (_ShipLength != 0) {
+            _ShipData = new int[length];
+
+        for (int i = 0; i < _ShipLength; i++) {
+            _ShipData[i] = 1000 + (i+1)*100;
+        }
+    } else {
+        _ShipData = nullptr;
     }
 }
 
@@ -27,16 +32,22 @@ bool Ship::IsHit(int piece) {
 }
 
 bool Ship::IsSunk() {
-    int Sum = 0;
-    for (int i = 0; i < _ShipLength; i++) {
-        Sum = Sum + _ShipData[i]%1000;
+
+    if (_IsSunk != true) {
+        int Sum = 0;
+        for (int i = 0; i < _ShipLength; i++) {
+            Sum = Sum + _ShipData[i]%1000;
+        }
+
+        if(Sum == 0) {
+            _IsSunk = true;
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    if(Sum == 0) {
-        return true;
-    } else {
-        return false;
-    }
+    return _IsSunk;
 }
 
 void Ship::WriteShipData(int piece, int x, int y) {
