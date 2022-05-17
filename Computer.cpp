@@ -80,6 +80,6 @@ void Player::Move(User* opponent){ //Computer moves, set on easy right now, comp
             }
             z = false;
         }
-        std::cout<<"Computer moved at (" << x << ")(" << y << ")"<<endl;
     }
+    std::cout<<"Computer moved at (" << x << ")(" << y << ")"<<endl;
 }
