@@ -8,6 +8,7 @@ class Computer: public User {
     public:
         Computer();
         void Move(User* opponent);
+        void DisplayBoard();
 };
 
 #endif

@@ -78,6 +78,10 @@ void Ship::Sink() {
     return;
 }
 
+int Ship::ReturnCoords(int piece) {
+    return _ShipData[piece-1]%100;
+}
+
 //deconstructs the int array when done
 Ship::~Ship() {
     delete[] _ShipData;

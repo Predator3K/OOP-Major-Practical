@@ -5,7 +5,8 @@
 
 class User {
 
-    private:
+    public:
+
         //Board for the ships for the user
         int ShipBoard[10][10];
 
@@ -15,7 +16,6 @@ class User {
         //Pointer for the ships
         Ship* Ships;
 
-    public:
         //Constructor
         User();
 
@@ -23,7 +23,9 @@ class User {
         bool WinCondition(User* opponent);
 
         //pure virtual function for a user to make a move
-        virtual void Move() = 0;
+        virtual void Move(User* opponent) = 0;
+
+        virtual void DisplayBoard() = 0;
 
         //Deconstructor
         ~User();

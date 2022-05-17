@@ -8,10 +8,11 @@ class Ship {
     private:
         int _ShipLength;
         std::string _ShipName;
-        int* _ShipData;
         bool _IsSunk;
 
     public:
+        int* _ShipData;
+
         //Default constructor
         Ship();
 
@@ -35,9 +36,11 @@ class Ship {
 
         //Allows a ship piece to get hit given coordinates
         void ShipHit(int x, int y);
-        
+
         //sinks the ship
         void Sink();
+        
+        int ReturnCoords(int piece);
 
         //Deconstructor
         ~Ship();
