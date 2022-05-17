@@ -63,14 +63,15 @@ void Ship::WriteShipData(int piece, int x, int y) {
 }
 
 //hits the ship given the x and y coords
-void Ship::ShipHit(int x, int y) {
+bool Ship::ShipHit(int x, int y) {
     for (int i = 0; i < _ShipLength; i++) {
         if (_ShipData[i]%100 == 10*x+y) { //checks the 3rd and 4th element of the shipdata and if it is equal to xy (in that order, not the product) sets that piece to 'hit'
             _ShipData[i] = _ShipData[i] - 1000;
+            return true;
         }
     }
 
-    return;
+    return false;
 }
 
 void Ship::Sink() {

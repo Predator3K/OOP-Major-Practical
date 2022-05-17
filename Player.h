@@ -9,7 +9,6 @@ class Player: public User {
         Player();
         void Move(User* opponent);
         void DisplayBoard();
-        void Quit();
 
 };
 

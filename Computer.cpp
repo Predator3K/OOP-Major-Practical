@@ -21,7 +21,7 @@ Computer::Computer(){ //Computer Ship placement
                 }
     arrx[0] = x;
     arry[0] = y;
-    std::cout << "Computer placed Flagship at (" << x << ")(" << y << ")"<< std::endl;
+    std::cout << "Computer placed Flagship at (" << x << "," << y << ")" << std::endl;
 
     //placing Destroyer
     x = rand() % 5;
@@ -31,7 +31,7 @@ Computer::Computer(){ //Computer Ship placement
                 }
     arrx[1] = x;
     arry[1] = y;
-    std::cout << "Computer placed Destroyer at (" << x << ")(" << y << ")"<< std::endl;
+    std::cout << "Computer placed Destroyer at (" << x << "," << y << ")" << std::endl;
 
     //placing Carrier1
     x = rand() % 6;
@@ -41,7 +41,7 @@ Computer::Computer(){ //Computer Ship placement
                 }
     arrx[2] = x;
     arry[2] = y;
-    std::cout << "Computer placed Carrier1 at (" << x << ")(" << y << ")"<< std::endl;
+    std::cout << "Computer placed Carrier1 at (" << x << "," << y << ")" << std::endl;
 
     //placing Carrier2
     x = rand() % 6;
@@ -51,7 +51,7 @@ Computer::Computer(){ //Computer Ship placement
                 }
     arrx[3] = x;
     arry[3] = y;
-    std::cout << "Computer placed Carrier2 at (" << x << ")(" << y << ")"<< std::endl;
+    std::cout << "Computer placed Carrier2 at (" << x << "," << y << ")" << std::endl;
 
     //placing Submarine1
     x = rand() % 7;
@@ -61,7 +61,7 @@ Computer::Computer(){ //Computer Ship placement
                 }
     arrx[4] = x;
     arry[4] = y;
-    std::cout << "Computer placed Submarine1 at (" << x << ")(" << y << ")"<< std::endl;
+    std::cout << "Computer placed Submarine1 at (" << x << "," << y << ")" << std::endl;
 
     //placing Submarine2
     x = rand() % 7;
@@ -71,7 +71,7 @@ Computer::Computer(){ //Computer Ship placement
                 }
     arrx[5] = x;
     arry[5] = y;
-    std::cout << "Computer placed Submarine2 at (" << x << ")(" << y << ")"<< std::endl;
+    std::cout << "Computer placed Submarine2 at (" << x << "," << y << ")" << std::endl;
 
     //placing Scout Boat1
     x = rand() % 8;
@@ -81,7 +81,7 @@ Computer::Computer(){ //Computer Ship placement
                 }
     arrx[6] = x;
     arry[6] = y;
-    std::cout << "Computer placed Scout Boat1 at (" << x << ")(" << y << ")"<< std::endl;
+    std::cout << "Computer placed Scout Boat1 at (" << x << "," << y << ")" << std::endl;
 
     //placing Scout Boat1
     x = rand() % 8;
@@ -91,14 +91,14 @@ Computer::Computer(){ //Computer Ship placement
                 }
     arrx[7] = x;
     arry[7] = y;
-    std::cout << "Computer placed Scout Boat2 at (" << x << ")(" << y << ")"<< std::endl;
+    std::cout << "Computer placed Scout Boat2 at (" << x << "," << y << ")" << std::endl;
 
     for(int i=0;i<10;i++){
         for(int j=0;j<10;j++){
             for(int k=0;k<8;k++){
                 for(int m = 0; m < Ships[k].GetLength(); m++) {
                     if(Ships[k].ReturnCoords(m+1) == i + j*10) {
-                        ShipBoard[i][j] = 2;
+                        ShipBoard[i][j] = k+1;
                     }
                 }
             }
@@ -110,26 +110,35 @@ void Computer::Move(User* opponent){ //Computer moves, set on easy right now, co
     int x = 0;
     int y = 0;
     bool z = true;
-    while(z == true) {
-        x = rand() % 9;
-        y = rand() % 9;
-        std::cout << x << " " << y << std::endl;
-        if(HitBoard[x][y] == 0){
-            for(int i=0;i<8;i++){
-                (*opponent).Ships[i].ShipHit(x,y);
+    while(z) {
+        x = rand() % 10;
+        y = rand() % 10;
+        if (HitBoard[x][y] == 0) {
+            for(int i=0;i<8;i++) {
+                if ((*opponent).Ships[i].ShipHit(y,x)) {
+                    std::cout << "Computer hit a ship at (" << x << "," << y << ")" << std::endl;
+                    HitBoard[x][y] = 2;
+                    std::cout << HitBoard[x][y] << std::endl;
+                    i = 8;
+                } else {
+                    HitBoard[x][y] = 1;
+                }
             }
             z = false;
         }
     }
-    HitBoard[x][y] = 1;
-    std::cout<<"Computer moved at (" << x << ")(" << y << ")"<< std::endl;
-    std::this_thread::sleep_for(50ms);
+    std::cout<<"Computer moved at (" << x << "," << y << ")"<< std::endl;
+    //std::this_thread::sleep_for (std::chrono::milliseconds(1000));
 }
 
 void Computer::DisplayBoard(){
     for(int i=0;i<10;i++){
         for(int j=0;j<10;j++){
-            std::cout << ShipBoard[i][j] << " ";
+            std::cout<< ShipBoard[i][j] << " ";
+        }
+        std::cout << "| ";
+        for (int m = 0; m < 10; m++) {
+            std::cout << HitBoard[i][m] << " ";
         }
         std::cout<<std::endl;
     }

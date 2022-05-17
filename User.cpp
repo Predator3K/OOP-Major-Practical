@@ -27,7 +27,7 @@ bool User::WinCondition(User* opponent) {
     }
 
     if (ShipsSunk == 8) {
-        std::cout << "Player won!" << std::endl;
+        std::cout << "Game won!" << std::endl;
         return true;
     }
 

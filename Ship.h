@@ -35,7 +35,7 @@ class Ship {
         void WriteShipData(int piece, int x, int y);
 
         //Allows a ship piece to get hit given coordinates
-        void ShipHit(int x, int y);
+        bool ShipHit(int x, int y);
 
         //sinks the ship
         void Sink();
