@@ -15,6 +15,7 @@ Computer::Computer(){ //Computer Ship placement
     Ships[0].WriteShipData(0,x,y);
     arrx[0] = x;
     arry[0] = y;
+    std::cout << "Computer placed Flagship at (" << x << ")(" << y << ")"<<endl;
 
     //placing Destroyer
     x = rand() % 5;
@@ -22,6 +23,7 @@ Computer::Computer(){ //Computer Ship placement
     Ships[1].WriteShipData(1,x,y);
     arrx[1] = x;
     arry[1] = y;
+    std::cout << "Computer placed Destroyer at (" << x << ")(" << y << ")"<<endl;
 
     //placing Carrier1
     x = rand() % 6;
@@ -29,6 +31,7 @@ Computer::Computer(){ //Computer Ship placement
     Ships[2].WriteShipData(2,x,y);
     arrx[2] = x;
     arry[2] = y;
+    std::cout << "Computer placed Carrier1 at (" << x << ")(" << y << ")"<<endl;
 
     //placing Carrier2
     x = rand() % 6;
@@ -36,6 +39,7 @@ Computer::Computer(){ //Computer Ship placement
     Ships[3].WriteShipData(3,x,y);
     arrx[3] = x;
     arry[3] = y;
+    std::cout << "Computer placed Carrier2 at (" << x << ")(" << y << ")"<<endl;
 
     //placing Submarine1
     x = rand() % 7;
@@ -43,6 +47,7 @@ Computer::Computer(){ //Computer Ship placement
     Ships[4].WriteShipData(4,x,y);
     arrx[4] = x;
     arry[4] = y;
+    std::cout << "Computer placed Submarine1 at (" << x << ")(" << y << ")"<<endl;
 
     //placing Submarine2
     x = rand() % 7;
@@ -50,6 +55,7 @@ Computer::Computer(){ //Computer Ship placement
     Ships[5].WriteShipData(5,x,y);
     arrx[5] = x;
     arry[5] = y;
+    std::cout << "Computer placed Submarine2 at (" << x << ")(" << y << ")"<<endl;
 
     //placing Scout Boat1
     x = rand() % 8;
@@ -57,6 +63,7 @@ Computer::Computer(){ //Computer Ship placement
     Ships[6].WriteShipData(6,x,y);
     arrx[6] = x;
     arry[6] = y;
+    std::cout << "Computer placed Scout Boat1 at (" << x << ")(" << y << ")"<<endl;
 
     //placing Scout Boat1
     x = rand() % 8;
@@ -64,6 +71,7 @@ Computer::Computer(){ //Computer Ship placement
     Ships[7].WriteShipData(7,x,y);
     arrx[7] = x;
     arry[7] = y;
+    std::cout << "Computer placed Scout Boat2 at (" << x << ")(" << y << ")"<<endl;
 }
 
 void Player::Move(User* opponent){ //Computer moves, set on easy right now, compltetly random moves
