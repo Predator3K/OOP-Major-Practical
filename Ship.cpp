@@ -73,6 +73,11 @@ void Ship::ShipHit(int x, int y) {
     return;
 }
 
+void Ship::Sink() {
+    _IsSunk = true;
+    return;
+}
+
 //deconstructs the int array when done
 Ship::~Ship() {
     delete[] _ShipData;

@@ -35,6 +35,9 @@ class Ship {
 
         //Allows a ship piece to get hit given coordinates
         void ShipHit(int x, int y);
+        
+        //sinks the ship
+        void Sink();
 
         //Deconstructor
         ~Ship();
