@@ -1,5 +1,6 @@
 #include "User.h"
 #include <cstring>
+#include <iostream>
 
 User::User() {
     memset(HitBoard, 0, sizeof(HitBoard));
@@ -26,6 +27,7 @@ bool User::WinCondition(User* opponent) {
     }
 
     if (ShipsSunk == 8) {
+        std::cout << "Player won!" << std::endl;
         return true;
     }
 
