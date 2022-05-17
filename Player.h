@@ -7,9 +7,9 @@ class Player: public User {
 
     public:
         Player();
-        void Move();
+        void Move(User* opponent);
         void DisplayBoard();
-        void Quit;
+        void Quit();
 
 };
 
