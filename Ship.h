@@ -39,7 +39,7 @@ class Ship {
 
         //sinks the ship
         void Sink();
-        
+
         int ReturnCoords(int piece);
 
         //Deconstructor

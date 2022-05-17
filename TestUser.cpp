@@ -7,6 +7,6 @@ int main() {
     User user2;
     User* user_ptr= &user2;
 
-    std::cout << user1.WinCondition(user_ptr) << std::endl; 
+    std::cout << user1.WinCondition(user_ptr) << std::endl;
     return 0;
 }

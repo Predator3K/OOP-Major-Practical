@@ -10,8 +10,6 @@ using namespace std::chrono_literals;
 Computer::Computer(){ //Computer Ship placement
     int x = 0;
     int y = 0;
-    int arrx[8] = {0,0,0,0,0,0,0,0};
-    int arry[8] = {0,0,0,0,0,0,0,0};
 
     //placing Flagship
     x = rand() % 4;
@@ -19,8 +17,6 @@ Computer::Computer(){ //Computer Ship placement
     for(int i = x; i < x+Ships[0].GetLength();i ++){
                     Ships[0].WriteShipData(i-x+1,i,y); // change 1
                 }
-    arrx[0] = x;
-    arry[0] = y;
     std::cout << "Computer placed Flagship at (" << x << "," << y << ")" << std::endl;
 
     //placing Destroyer
@@ -29,8 +25,6 @@ Computer::Computer(){ //Computer Ship placement
     for(int i = x; i < x+Ships[1].GetLength();i ++){
                     Ships[1].WriteShipData(i-x+1,i,y); // change 1
                 }
-    arrx[1] = x;
-    arry[1] = y;
     std::cout << "Computer placed Destroyer at (" << x << "," << y << ")" << std::endl;
 
     //placing Carrier1
@@ -39,8 +33,6 @@ Computer::Computer(){ //Computer Ship placement
     for(int i = x; i < x+Ships[2].GetLength();i ++){
                     Ships[2].WriteShipData(i-x+1,i,y); // change 1
                 }
-    arrx[2] = x;
-    arry[2] = y;
     std::cout << "Computer placed Carrier1 at (" << x << "," << y << ")" << std::endl;
 
     //placing Carrier2
@@ -49,8 +41,6 @@ Computer::Computer(){ //Computer Ship placement
     for(int i = x; i < x+Ships[3].GetLength();i ++){
                     Ships[3].WriteShipData(i-x+1,i,y); // change 1
                 }
-    arrx[3] = x;
-    arry[3] = y;
     std::cout << "Computer placed Carrier2 at (" << x << "," << y << ")" << std::endl;
 
     //placing Submarine1
@@ -59,8 +49,6 @@ Computer::Computer(){ //Computer Ship placement
     for(int i = x; i < x+Ships[4].GetLength();i ++){
                     Ships[4].WriteShipData(i-x+1,i,y); // change 1
                 }
-    arrx[4] = x;
-    arry[4] = y;
     std::cout << "Computer placed Submarine1 at (" << x << "," << y << ")" << std::endl;
 
     //placing Submarine2
@@ -69,8 +57,6 @@ Computer::Computer(){ //Computer Ship placement
     for(int i = x; i < x+Ships[5].GetLength();i ++){
                     Ships[5].WriteShipData(i-x+1,i,y); // change 1
                 }
-    arrx[5] = x;
-    arry[5] = y;
     std::cout << "Computer placed Submarine2 at (" << x << "," << y << ")" << std::endl;
 
     //placing Scout Boat1
@@ -79,8 +65,6 @@ Computer::Computer(){ //Computer Ship placement
     for(int i = x; i < x+Ships[6].GetLength();i ++){
                     Ships[6].WriteShipData(i-x+1,i,y); // change 1
                 }
-    arrx[6] = x;
-    arry[6] = y;
     std::cout << "Computer placed Scout Boat1 at (" << x << "," << y << ")" << std::endl;
 
     //placing Scout Boat1
@@ -89,8 +73,6 @@ Computer::Computer(){ //Computer Ship placement
     for(int i = x; i < x+Ships[7].GetLength();i ++){
                     Ships[7].WriteShipData(i-x+1,i,y); // change 1
                 }
-    arrx[7] = x;
-    arry[7] = y;
     std::cout << "Computer placed Scout Boat2 at (" << x << "," << y << ")" << std::endl;
 
     for(int i=0;i<10;i++){
@@ -118,7 +100,6 @@ void Computer::Move(User* opponent){ //Computer moves, set on easy right now, co
                 if ((*opponent).Ships[i].ShipHit(y,x)) {
                     std::cout << "Computer hit a ship at (" << x << "," << y << ")" << std::endl;
                     HitBoard[x][y] = 2;
-                    std::cout << HitBoard[x][y] << std::endl;
                     i = 8;
                 } else {
                     HitBoard[x][y] = 1;
@@ -131,7 +112,7 @@ void Computer::Move(User* opponent){ //Computer moves, set on easy right now, co
     //std::this_thread::sleep_for (std::chrono::milliseconds(1000));
 }
 
-void Computer::DisplayBoard(){
+void Computer::DisplayBoard(User* opponent){
     for(int i=0;i<10;i++){
         for(int j=0;j<10;j++){
             std::cout<< ShipBoard[i][j] << " ";

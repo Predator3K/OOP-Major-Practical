@@ -14,12 +14,12 @@ int main() {
         User* Player2 = new Player;
 
         while(Player2->WinCondition(Player1) != true) {
-            Player1->DisplayBoard();
+            Player1->DisplayBoard(Player2);
             Player1->Move(Player2);
             if(Player1->WinCondition(Player2) == true) {
                 break;
             }
-            Player2->DisplayBoard();
+            Player2->DisplayBoard(Player1);
             Player2->Move(Player1);
         }
 
@@ -27,16 +27,16 @@ int main() {
         delete Player2;
     } else if(choice == "computer") {
 
-        User* Player1 = new Computer;
+        User* Player1 = new Player;
         User* Computer1 = new Computer;
 
         while(Computer1->WinCondition(Player1) != true) {
-            Player1->DisplayBoard();
+            Player1->DisplayBoard(Computer1);
             Player1->Move(Computer1);
             if(Player1->WinCondition(Computer1) == true) {
                 break;
             }
-            Computer1->DisplayBoard();
+            //Computer1->DisplayBoard();
             Computer1->Move(Player1);
         }
 

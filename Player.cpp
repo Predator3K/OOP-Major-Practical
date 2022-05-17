@@ -5,8 +5,6 @@
 Player::Player(){
     int x = 0;
     int y =0;
-    int arrx[8] = {0,0,0,0,0,0,0,0};
-    int arry[8] = {0,0,0,0,0,0,0,0};
     std::cout<< "Please input the x-coordinate for Flagship" <<std::endl;
     std::cin>> x;
     std::cout<< "Please input the y-coordinate for Flagship" <<std::endl;
@@ -19,7 +17,6 @@ Player::Player(){
             for(int i = x; i < x+Ships[0].GetLength();i ++){
                 Ships[0].WriteShipData(i-x+1,i,y);
             }
-        arrx[0] = x;
         }
     }
     //---------------------------------------------
@@ -37,14 +34,12 @@ Player::Player(){
             for(int i = x; i < x+Ships[1].GetLength();i ++){
             Ships[1].WriteShipData(i-x+1,i,y);
             }
-        arrx[1] = x;
-        arry[1] = y;
         }
     }
     //---------------------------------------------
-    std::cout<< "Please input the x-coordinate for Carrier" <<std::endl;
+    std::cout<< "Please input the x-coordinate for Carrier 1" <<std::endl;
     std::cin>> x;
-    std::cout<< "Please input the y-coordinate for Carrier" <<std::endl;
+    std::cout<< "Please input the y-coordinate for Carrier 1" <<std::endl;
     std::cin>> y;
 
     if(x > 10 || x < 0 ){
@@ -55,14 +50,12 @@ Player::Player(){
             for(int i = x; i < x+Ships[2].GetLength();i ++){
                 Ships[2].WriteShipData(i-x+1,i,y); // change 1
             }
-        arrx[2] = x;
-        arry[2] = y;
         }
     }
     //---------------------------------------------
-    std::cout<< "Please input the x-coordinate for Carrier" <<std::endl;
+    std::cout<< "Please input the x-coordinate for Carrier 2" <<std::endl;
     std::cin>> x;
-    std::cout<< "Please input the y-coordinate for Carrier" <<std::endl;
+    std::cout<< "Please input the y-coordinate for Carrier 2" <<std::endl;
     std::cin>> y;
 
     if(x > 10 || x < 0 ){
@@ -73,14 +66,12 @@ Player::Player(){
             for(int i = x; i < x+Ships[3].GetLength();i ++){
                 Ships[3].WriteShipData(i-x+1,i,y); // change 1
             }
-        arrx[3] = x;
-        arry[3] = y;
         }
     }
     //---------------------------------------------
-    std::cout<< "Please input the x-coordinate for Submarine" <<std::endl;
+    std::cout<< "Please input the x-coordinate for Submarine 1" <<std::endl;
     std::cin>> x;
-    std::cout<< "Please input the y-coordinate for Submarine" <<std::endl;
+    std::cout<< "Please input the y-coordinate for Submarine 1" <<std::endl;
     std::cin>> y;
 
     if(x > 10 || x < 0 ){
@@ -91,14 +82,12 @@ Player::Player(){
             for(int i = x; i < x+Ships[4].GetLength();i ++){
                 Ships[4].WriteShipData(i-x+1,i,y); // change 1
             }
-        arrx[4] = x;
-        arry[4] = y;
         }
     }
     //---------------------------------------------
-    std::cout<< "Please input the x-coordinate for Submarine" <<std::endl;
+    std::cout<< "Please input the x-coordinate for Submarine 2" <<std::endl;
     std::cin>> x;
-    std::cout<< "Please input the y-coordinate for Submarine" <<std::endl;
+    std::cout<< "Please input the y-coordinate for Submarine 2" <<std::endl;
     std::cin>> y;
 
     if(x > 10 || x < 0 ){
@@ -109,14 +98,12 @@ Player::Player(){
             for(int i = x; i < x+Ships[5].GetLength();i ++){
                 Ships[5].WriteShipData(i-x+1,i,y); // change 1
             }
-        arrx[5] = x;
-        arry[5] = y;
         }
     }
     //---------------------------------------------
-    std::cout<< "Please input the x-coordinate for Scout Boat" <<std::endl;
+    std::cout<< "Please input the x-coordinate for Scout Boat 1" <<std::endl;
     std::cin>> x;
-    std::cout<< "Please input the y-coordinate for Scout Boat" <<std::endl;
+    std::cout<< "Please input the y-coordinate for Scout Boat 1" <<std::endl;
     std::cin>> y;
 
     if(x > 10 || x < 0 ){
@@ -127,14 +114,12 @@ Player::Player(){
             for(int i = x; i < x+Ships[6].GetLength();i ++){
                 Ships[6].WriteShipData(i-x+1,i,y); // change 1
             }
-        arrx[6] = x;
-        arry[6] = y;
         }
     }
     //---------------------------------------------
-    std::cout<< "Please input the x-coordinate for Scout Boat" <<std::endl;
+    std::cout<< "Please input the x-coordinate for Scout Boat 2" <<std::endl;
     std::cin>> x;
-    std::cout<< "Please input the y-coordinate for Scout Boat" <<std::endl;
+    std::cout<< "Please input the y-coordinate for Scout Boat 2" <<std::endl;
     std::cin>> y;
 
     if(x > 10 || x < 0 ){
@@ -145,8 +130,6 @@ Player::Player(){
             for(int i = x; i < x+Ships[7].GetLength();i ++){
                 Ships[7].WriteShipData(i-x+1,i,y); // change 1
             }
-        arrx[7] = x;
-        arry[7] = y;
         }
     }
     //---------------------------------------------
@@ -173,17 +156,17 @@ void Player::Move(User* opponent){
         if(x == -1) {
             for(int i =0;i<8;i++){
             Ships[i].Sink();
-            return;
+            (*opponent).Ships[i].Sink();
             }
+            return;
         }
         std::cout<< "Please input the y-coordinate" <<std::endl;
         std::cin>> y;
         if(HitBoard[x][y] == 0){
             for(int i=0;i<8;i++) {
                 if ((*opponent).Ships[i].ShipHit(y,x)) {
-                    std::cout << "Computer hit a ship at (" << x << "," << y << ")" << std::endl;
+                    std::cout << "Player hit a ship at (" << x << "," << y << ")" << std::endl;
                     HitBoard[x][y] = 2;
-                    std::cout << HitBoard[x][y] << std::endl;
                     i = 8;
                 } else {
                     HitBoard[x][y] = 1;
@@ -198,22 +181,20 @@ void Player::Move(User* opponent){
     return;
 }
 
-void Player::DisplayBoard(){
+void Player::DisplayBoard(User* opponent){
     for(int i=0;i<10;i++){
         for(int j=0;j<10;j++){
-            std::cout<< ShipBoard[i][j] << " ";
+            std::cout << ShipBoard[i][j] << " ";
         }
-        std::cout << " | ";
+        std::cout << "| ";
         for (int m = 0; m < 10; m++) {
             std::cout << HitBoard[i][m] << " ";
+        }
+        std::cout << "| ";
+        for (int m = 0; m < 10; m++) {
+            std::cout << (*opponent).HitBoard[i][m] << " ";
         }
         std::cout<<std::endl;
     }
     return;
 }
-
-// 0 0 0 0 0 0 0 0 0 0
-// 0 2 2 2 2 2 2 0 0 0
-// 0 2 2 2 2 2 0 0 0 0
-// 0 2 2 2 2 0 0 0 0 0
-

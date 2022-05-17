@@ -25,7 +25,7 @@ class User {
         //pure virtual function for a user to make a move
         virtual void Move(User* opponent) = 0;
 
-        virtual void DisplayBoard() = 0;
+        virtual void DisplayBoard(User* opponent) = 0;
 
         //Deconstructor
         ~User();

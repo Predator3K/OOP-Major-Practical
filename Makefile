@@ -13,7 +13,6 @@ TestUser: Ship.cpp User.cpp TestUser.cpp
 	$(CC) Ship.cpp User.cpp TestUser.cpp -o TestUser $(FLAGS)
 	./TestUser
 
-upload: $(SRCS)
-	git add $(SRCS)
-	git commit -m "Make file add"
-	git push origin $(BRANCH)
+Game: Ship.cpp User.cpp Player.cpp Computer.cpp Main.cpp
+	$(CC) Ship.cpp User.cpp Player.cpp Computer.cpp Main.cpp -o Game
+	./Game

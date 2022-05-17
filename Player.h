@@ -8,7 +8,7 @@ class Player: public User {
     public:
         Player();
         void Move(User* opponent);
-        void DisplayBoard();
+        void DisplayBoard(User* opponent);
 
 };
 
