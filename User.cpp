@@ -17,11 +17,15 @@ User::User() {
     new(&Ships[7]) Ship("Scout Boat", 2);
 
     HitBoard = new int*[10];
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < 10; i++) {
             HitBoard[i] = new int[10];
         }
 
-    //memset(HitBoard, 0, sizeof(HitBoard));
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            HitBoard[i][j] = 0;
+        }
+    }
 }
 
 Ship* User::GetShips() {
@@ -52,5 +56,5 @@ User::~User() {
     for (int i  = 0; i < 10; i++) {
         delete[] HitBoard[i];
     }
-    delete HitBoard;
+    delete[] HitBoard;
 }

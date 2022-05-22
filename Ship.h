@@ -6,12 +6,13 @@
 class Ship {
 
     private:
+
         int _ShipLength;
         std::string _ShipName;
+        int* _ShipData;
         bool _IsSunk;
 
     public:
-        int* _ShipData;
 
         //Default constructor
         Ship();
@@ -25,9 +26,6 @@ class Ship {
         //Returns the ship length
         int GetLength();
 
-        //Returns if that ship's piece is hit
-        bool IsHit(int piece);
-
         //Returns if the ship is sunk or not (true or false)
         bool IsSunk();
 
@@ -40,6 +38,7 @@ class Ship {
         //sinks the ship
         void Sink();
 
+        //Returns the coordinates of a piece
         int ReturnCoords(int piece);
 
         //Deconstructor

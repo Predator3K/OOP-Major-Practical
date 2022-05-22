@@ -27,15 +27,6 @@ int Ship::GetLength() {
     return _ShipLength;
 }
 
-//checks if a specific piece is hit or not
-bool Ship::IsHit(int piece) {
-    if(_ShipData[piece] == 1) {
-        return false;
-    } else {
-        return true;
-    }
-}
-
 //checks if the ship is sunk, and once it is, simply returns it being sunk (doesnt check every time)
 bool Ship::IsSunk() {
 

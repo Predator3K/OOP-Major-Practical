@@ -113,13 +113,17 @@ void Computer::Move(User* opponent){ //Computer moves, set on easy right now, co
 }
 
 void Computer::DisplayBoard(User* opponent){
-    for(int i=0;i<10;i++){
+     for(int i=0;i<10;i++){
         for(int j=0;j<10;j++){
-            std::cout<< ShipBoard[i][j] << " ";
+            std::cout << ShipBoard[i][j] << " ";
         }
         std::cout << "| ";
         for (int m = 0; m < 10; m++) {
             std::cout << HitBoard[i][m] << " ";
+        }
+        std::cout << "| ";
+        for (int m = 0; m < 10; m++) {
+            std::cout << ((*opponent).GetHitBoard())[i][m] << " ";
         }
         std::cout<<std::endl;
     }

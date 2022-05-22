@@ -21,8 +21,10 @@ class User {
         //Constructor
         User();
 
+        //Returns the ships array
         Ship* GetShips();
 
+        //Returns the hit board array
         int** GetHitBoard();
 
         //Checks if the user won against the other user
@@ -31,10 +33,11 @@ class User {
         //pure virtual function for a user to make a move
         virtual void Move(User* opponent) = 0;
 
+        //Allows computer/player to display their board
         virtual void DisplayBoard(User* opponent) = 0;
 
-        //Deconstructor
-        ~User();
+        //Virtual Deconstructor
+        virtual ~User();
 
 };
 
