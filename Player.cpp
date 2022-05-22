@@ -156,7 +156,7 @@ void Player::Move(User* opponent){
         if(x == -1) {
             for(int i =0;i<8;i++){
             Ships[i].Sink();
-            (*opponent).Ships[i].Sink();
+            ((*opponent).GetShips())[i].Sink();
             }
             return;
         }
@@ -164,7 +164,7 @@ void Player::Move(User* opponent){
         std::cin>> y;
         if(HitBoard[x][y] == 0){
             for(int i=0;i<8;i++) {
-                if ((*opponent).Ships[i].ShipHit(y,x)) {
+                if (((*opponent).GetShips())[i].ShipHit(y,x)) {
                     std::cout << "Player hit a ship at (" << x << "," << y << ")" << std::endl;
                     HitBoard[x][y] = 2;
                     i = 8;
@@ -192,7 +192,7 @@ void Player::DisplayBoard(User* opponent){
         }
         std::cout << "| ";
         for (int m = 0; m < 10; m++) {
-            std::cout << (*opponent).HitBoard[i][m] << " ";
+            std::cout << ((*opponent).GetHitBoard())[i][m] << " ";
         }
         std::cout<<std::endl;
     }

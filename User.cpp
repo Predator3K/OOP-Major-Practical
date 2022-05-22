@@ -3,7 +3,6 @@
 #include <iostream>
 
 User::User() {
-    memset(HitBoard, 0, sizeof(HitBoard));
     memset(ShipBoard, 0, sizeof(ShipBoard));
 
     Ships = new Ship[8];
@@ -16,6 +15,21 @@ User::User() {
     new(&Ships[5]) Ship("Submarine", 3);
     new(&Ships[6]) Ship("Scout Boat", 2);
     new(&Ships[7]) Ship("Scout Boat", 2);
+
+    HitBoard = new int*[10];
+        for (int i = 0; i < 10; ++i) {
+            HitBoard[i] = new int[10];
+        }
+
+    //memset(HitBoard, 0, sizeof(HitBoard));
+}
+
+Ship* User::GetShips() {
+    return Ships;
+}
+
+int** User::GetHitBoard() {
+    return HitBoard;
 }
 
 bool User::WinCondition(User* opponent) {
@@ -27,7 +41,6 @@ bool User::WinCondition(User* opponent) {
     }
 
     if (ShipsSunk == 8) {
-        std::cout << "Game won!" << std::endl;
         return true;
     }
 
@@ -36,4 +49,7 @@ bool User::WinCondition(User* opponent) {
 
 User::~User() {
     delete[] Ships;
+    for (int i  = 0; i < 10; i++) {
+        delete[] HitBoard[i];
+    }
 }

@@ -5,19 +5,25 @@
 
 class User {
 
-    public:
+    protected:
 
         //Board for the ships for the user
         int ShipBoard[10][10];
 
-        //Board for the shots the player has taken
-        int HitBoard[10][10];
-
         //Pointer for the ships
         Ship* Ships;
 
+        //Board for the shots the player has taken
+        int** HitBoard;
+
+    public:
+
         //Constructor
         User();
+
+        Ship* GetShips();
+
+        int** GetHitBoard();
 
         //Checks if the user won against the other user
         bool WinCondition(User* opponent);

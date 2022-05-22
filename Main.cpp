@@ -44,7 +44,5 @@ int main() {
         delete Computer1;
     }
 
-
-
     return 0;
 }

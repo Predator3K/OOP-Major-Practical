@@ -97,7 +97,7 @@ void Computer::Move(User* opponent){ //Computer moves, set on easy right now, co
         y = rand() % 10;
         if (HitBoard[x][y] == 0) {
             for(int i=0;i<8;i++) {
-                if ((*opponent).Ships[i].ShipHit(y,x)) {
+                if (((*opponent).GetShips())[i].ShipHit(y,x)) {
                     std::cout << "Computer hit a ship at (" << x << "," << y << ")" << std::endl;
                     HitBoard[x][y] = 2;
                     i = 8;
