@@ -1,6 +1,9 @@
 #include <iostream>
 #include <string>
+#include<limits>
 #include "Player.h"
+
+using namespace std;
 
 Player::Player(){
     int x = 0;
@@ -11,12 +14,12 @@ Player::Player(){
     while (counter<8){
         std::cout<< "Please input the x-coordinate for "<<Ships[counter].GetName() <<std::endl;
         std::cin>> x;
-        if(x>0 && x<10){
+        if(x>0 && x<10 && !std::cin.fail()){
 
             while (true){
                 std::cout<< "Please input the y-coordinate for "<<Ships[counter].GetName() <<std::endl;
                 std::cin>> y;
-                if(y>0 && y<10){
+                if(y>0 && y<10 && !cin.fail()){
                     if(x + Ships[counter].GetLength() < 10){
                     for(int i = x; i < x+Ships[counter].GetLength();i ++){
                         Ships[counter].WriteShipData(i-x+1,i,y); 
@@ -25,10 +28,14 @@ Player::Player(){
                 break;
             }
                 }else{
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(),'\n');
                 std::cout<< "Invalid y-coordinate for "<<Ships[counter].GetName() <<std::endl;
                 }
             }
-        }else{
+        }else {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
         std::cout<< "Invalid x-coordinate for "<<Ships[counter].GetName() <<std::endl;
         }
     }
