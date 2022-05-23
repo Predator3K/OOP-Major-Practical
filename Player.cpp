@@ -9,8 +9,8 @@ Player::Player(){
     int counter = 0;
 
     while (counter<8){
-        std::cout<< "Please input the x-coordinate for "<<Ships[counter].GetName() <<std::endl;
-        std::cin>> x;
+        std::cout << "Please input the x-coordinate for "<<Ships[counter].GetName() <<std::endl;
+        std::cin >> x;
         if(x>0 && x<10){
 
             while (true){

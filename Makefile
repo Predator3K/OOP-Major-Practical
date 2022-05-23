@@ -3,7 +3,6 @@ SRCS = Ship.h Ship.cpp TestShip.cpp Makefile User.h User.cpp TestUser.cpp Player
 CC = g++
 FLAGS = -Wall -Wextra -pedantic -std=c++14
 
-all:
 
 TestShip: Ship.cpp TestShip.cpp
 	$(CC) Ship.cpp TestShip.cpp -o TestShip $(FLAGS)
@@ -14,5 +13,5 @@ TestUser: Ship.cpp User.cpp TestUser.cpp
 	./TestUser
 
 Game: Ship.cpp User.cpp Player.cpp Computer.cpp Main.cpp
-	$(CC) Ship.cpp User.cpp Player.cpp Computer.cpp Main.cpp -o Game
+	$(CC) Ship.cpp User.cpp Player.cpp Computer.cpp Main.cpp -o Game $(FLAGS)
 	./Game
