@@ -5,135 +5,35 @@
 Player::Player(){
     int x = 0;
     int y =0;
-    std::cout<< "Please input the x-coordinate for Flagship" <<std::endl;
-    std::cin>> x;
-    std::cout<< "Please input the y-coordinate for Flagship" <<std::endl;
-    std::cin>> y;
-    if(x > 10 || x < 0 ){
-        std::cout<< "Please input a valid x-coordinate" <<std::endl;
-    }
-    else{
-        if(x + Ships[0].GetLength() < 10){
-            for(int i = x; i < x+Ships[0].GetLength();i ++){
-                Ships[0].WriteShipData(i-x+1,i,y);
+
+    int counter = 0;
+
+    while (counter<8){
+        std::cout<< "Please input the x-coordinate for "<<Ships[counter].GetName() <<std::endl;
+        std::cin>> x;
+        if(x>0 && x<10){
+
+            while (true){
+                std::cout<< "Please input the y-coordinate for "<<Ships[counter].GetName() <<std::endl;
+                std::cin>> y;
+                if(y>0 && y<10){
+                    if(x + Ships[counter].GetLength() < 10){
+                    for(int i = x; i < x+Ships[counter].GetLength();i ++){
+                        Ships[counter].WriteShipData(i-x+1,i,y); 
+                }
+                counter++;
+                break;
             }
+                }else{
+                std::cout<< "Invalid y-coordinate for "<<Ships[counter].GetName() <<std::endl;
+                }
+            }
+        }else{
+        std::cout<< "Invalid x-coordinate for "<<Ships[counter].GetName() <<std::endl;
         }
     }
-    //---------------------------------------------
-    std::cout<< "Please input the x-coordinate for Destroyer" <<std::endl;
-    std::cin>> x;
-    std::cout<< "Please input the y-coordinate for Destroyer" <<std::endl;
-    std::cin>> y;
 
-    if(x > 10 || x < 0 ){
-        std::cout<< "Please input a valid x-coordinate" <<std::endl;
-    }
-    else{
-
-        if(x + Ships[1].GetLength() < 10){
-            for(int i = x; i < x+Ships[1].GetLength();i ++){
-            Ships[1].WriteShipData(i-x+1,i,y);
-            }
-        }
-    }
-    //---------------------------------------------
-    std::cout<< "Please input the x-coordinate for Carrier 1" <<std::endl;
-    std::cin>> x;
-    std::cout<< "Please input the y-coordinate for Carrier 1" <<std::endl;
-    std::cin>> y;
-
-    if(x > 10 || x < 0 ){
-        std::cout<< "Please input a valid x-coordinate" <<std::endl;
-    }
-    else {
-        if(x + Ships[2].GetLength() < 10){
-            for(int i = x; i < x+Ships[2].GetLength();i ++){
-                Ships[2].WriteShipData(i-x+1,i,y); // change 1
-            }
-        }
-    }
-    //---------------------------------------------
-    std::cout<< "Please input the x-coordinate for Carrier 2" <<std::endl;
-    std::cin>> x;
-    std::cout<< "Please input the y-coordinate for Carrier 2" <<std::endl;
-    std::cin>> y;
-
-    if(x > 10 || x < 0 ){
-        std::cout<< "Please input a valid x-coordinate" <<std::endl;
-    }
-    else{
-        if(x + Ships[3].GetLength() < 10){
-            for(int i = x; i < x+Ships[3].GetLength();i ++){
-                Ships[3].WriteShipData(i-x+1,i,y); // change 1
-            }
-        }
-    }
-    //---------------------------------------------
-    std::cout<< "Please input the x-coordinate for Submarine 1" <<std::endl;
-    std::cin>> x;
-    std::cout<< "Please input the y-coordinate for Submarine 1" <<std::endl;
-    std::cin>> y;
-
-    if(x > 10 || x < 0 ){
-        std::cout<< "Please input a valid x-coordinate" <<std::endl;
-    }
-    else{
-        if(x + Ships[4].GetLength() < 10){
-            for(int i = x; i < x+Ships[4].GetLength();i ++){
-                Ships[4].WriteShipData(i-x+1,i,y); // change 1
-            }
-        }
-    }
-    //---------------------------------------------
-    std::cout<< "Please input the x-coordinate for Submarine 2" <<std::endl;
-    std::cin>> x;
-    std::cout<< "Please input the y-coordinate for Submarine 2" <<std::endl;
-    std::cin>> y;
-
-    if(x > 10 || x < 0 ){
-        std::cout<< "Please input a valid x-coordinate" <<std::endl;
-    }
-    else{
-        if(x + Ships[5].GetLength() < 10){
-            for(int i = x; i < x+Ships[5].GetLength();i ++){
-                Ships[5].WriteShipData(i-x+1,i,y); // change 1
-            }
-        }
-    }
-    //---------------------------------------------
-    std::cout<< "Please input the x-coordinate for Scout Boat 1" <<std::endl;
-    std::cin>> x;
-    std::cout<< "Please input the y-coordinate for Scout Boat 1" <<std::endl;
-    std::cin>> y;
-
-    if(x > 10 || x < 0 ){
-        std::cout<< "Please input a valid x-coordinate" <<std::endl;
-    }
-    else{
-        if(x + Ships[5].GetLength() < 10){
-            for(int i = x; i < x+Ships[6].GetLength();i ++){
-                Ships[6].WriteShipData(i-x+1,i,y); // change 1
-            }
-        }
-    }
-    //---------------------------------------------
-    std::cout<< "Please input the x-coordinate for Scout Boat 2" <<std::endl;
-    std::cin>> x;
-    std::cout<< "Please input the y-coordinate for Scout Boat 2" <<std::endl;
-    std::cin>> y;
-
-    if(x > 10 || x < 0 ){
-        std::cout<< "Please input a valid x-coordinate" <<std::endl;
-    }
-    else{
-        if(x + Ships[6].GetLength() < 10){
-            for(int i = x; i < x+Ships[7].GetLength();i ++){
-                Ships[7].WriteShipData(i-x+1,i,y); // change 1
-            }
-        }
-    }
-    //---------------------------------------------
-    for(int i=0;i<10;i++){
+        for(int i=0;i<10;i++){
         for(int j=0;j<10;j++){
             for(int k=0;k<8;k++){
                 for(int m = 0; m < Ships[k].GetLength(); m++) {
