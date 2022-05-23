@@ -1,10 +1,12 @@
 #include "User.h"
 #include <cstring>
 #include <iostream>
+#include <chrono>
+#include <ctime>
 
 User::User() {
     memset(ShipBoard, 0, sizeof(ShipBoard));
-
+    start = std::chrono::system_clock::now();
     Ships = new Ship[8];
 
     new(&Ships[0]) Ship("Flagship", 6);
@@ -49,6 +51,15 @@ bool User::WinCondition(User* opponent) {
     }
 
     return false;
+}
+
+int User::GameTimer(){
+    std::chrono::time_point<std::chrono::system_clock> end;
+    end = std::chrono::system_clock::now();
+    std::chrono::duration<double> elapsed_seconds = end - start;
+    std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+    std::cout << "time passed: " << elapsed_seconds.count() << "s\n";
+    return 0;
 }
 
 User::~User() {
