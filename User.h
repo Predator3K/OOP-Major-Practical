@@ -2,6 +2,8 @@
 #define USER_H
 
 #include "Ship.h"
+#include <chrono>
+#include <ctime>
 
 class User {
 
@@ -15,6 +17,8 @@ class User {
 
         //Board for the shots the player has taken
         int** HitBoard;
+
+        std::chrono::time_point<std::chrono::system_clock> start;
 
     public:
 
@@ -35,6 +39,8 @@ class User {
 
         //Allows computer/player to display their board
         virtual void DisplayBoard(User* opponent) = 0;
+
+        int GameTimer();
 
         //Virtual Deconstructor
         virtual ~User();
