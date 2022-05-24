@@ -411,9 +411,16 @@ void Player::Move(User* opponent){
                 std::cout << "Invalid input: please input a number between 0 to 9" << std::endl;
             }
         }
-
         if(xvalid == true && yvalid == true) {
-            if(HitBoard[x][y] == 0){
+            if(HitBoard[x][y] != 0) {
+                std::cout<< "Please put in coordinates you have not hit" <<std::endl;
+                xvalid = false;
+                yvalid = false;
+            }
+        }
+
+        //If both inputs are valid, attempts to hit that spot
+        if(xvalid == true && yvalid == true) {
                 for(int i=0;i<5;i++) {
                     if (((*opponent).GetShips())[i].ShipHit(x,y)) {
                         std::cout << "Player has hit a ship at (" << x << "," << y << ")" << std::endl;
@@ -424,15 +431,8 @@ void Player::Move(User* opponent){
                     }
                 }
                 z = false;
-                xvalid = true;
-                yvalid = true;
-            } else {
-                std::cout<< "Please put in coordinates you have not hit" <<std::endl;
-                xvalid = true;
-                yvalid = true;
             }
         }
-    }
     return;
 }
 
