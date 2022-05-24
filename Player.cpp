@@ -22,6 +22,7 @@ Player::Player(){
     bool DirectionValid = false;
     bool overlap = false;
 
+    //Used for checking if a given direction is valid
     bool leftvalid = true;
     bool rightvalid = true;
     bool upvalid = true;
@@ -55,6 +56,7 @@ Player::Player(){
                 std::cout << "Invalid input: please input a number between 0 to 9" << std::endl;
             }
         }
+
         //If the x input is valid, asks for the y input, and if it is not an integer asks again
         if(xvalid == true && yvalid == false) {
             std::cout << "Please input the y-coordinate for "<<Ships[counter].GetName() << " between 0 and 9" << std::endl;
@@ -68,6 +70,7 @@ Player::Player(){
                 }
             }
         }
+
         //If the y input is valid, checks if it is between 0 and 9, if not it asks again
         if(xvalid == true && yvalid == true) {
             y = std::stoi(y1);
@@ -76,17 +79,18 @@ Player::Player(){
                 std::cout << "Invalid input: please input a number between 0 to 9" << std::endl;
             }
         }
+
+        //If the x and y inputs are valid, checks if that current spot has a boat at it already, and if it does says it overlaps
         if(xvalid == true && yvalid == true) {
             if (ShipBoard[x][y] != 0) {
-                std::cout << "Checked overlap" << std::endl;
+                 std::cout << Ships[counter].GetName() << " overlaps another ship, please try again" <<std::endl;
                 overlap = true;
                 xvalid = false;
                 yvalid = false;
             }
         }
-        if (overlap == true) {
-            std::cout << Ships[counter].GetName() << " overlaps another ship, please try again" <<std::endl;
-        }
+
+        //If the coordinates are valid and there is no current overlap, asks the user for which direction they'd like to place in. If this is invalid, it asks again
         if (xvalid == true && yvalid == true && overlap == false) {
             std::cout << "Please input a direction you would like the ship to go: Up (u), Down (d), Left (l) or Right (r)" << std::endl;
             while (DirectionValid == false) {
@@ -98,22 +102,37 @@ Player::Player(){
                     }
             }
         }
+
+        //If the coordinates are valid and there is no current overlap, asks the user to pick a direction to place the boat in
         if(xvalid == true && yvalid == true && overlap == false) {
+
+            //Places the boat in the right direction
             if (direction == "r") {
+
+                //Checks if the boat will go outside the boat if placed to the right, if it does, says it will go out of bounds
                 if(x + Ships[counter].GetLength() < 11) {
+
+                    //Checks if the boat overlaps another boat currently placed on the board, if it does, it says so and asks for a new direction
                     for (int i = 0; i < Ships[counter].GetLength(); i++) {
                         if (ShipBoard[x+i][y] != 0) {
                             overlap = true;
                         }
                     }
+
+                    //If there is no overlap, writes in the corresponding information into the ShipBoard and relevent Ship object and then resets, asking for the next boat
                     if (overlap == false) {
+
+                        //Writes in the ship data
                         for(int i = x; i < x+Ships[counter].GetLength();i ++) {
                             Ships[counter].WriteShipData(i-x+1,i,y);
                         }
+
+                        //Sets the checking flags to false for a new boat
                         xvalid = false;
                         yvalid = false;
-                        overlap = false;
                         DirectionValid = false;
+
+                        //Puts the ship on the board
                         for(int i=0;i<10;i++){
                             for(int j=0;j<10;j++){
                                 for(int m = 0; m < Ships[counter].GetLength(); m++) {
@@ -123,6 +142,8 @@ Player::Player(){
                                 }
                             }
                         }
+
+                        //Displays the board and it current boats
                         counter++;
                         if (counter < 5) {
                             std::cout << "  0 1 2 3 4 5 6 7 8 9" << std::endl;
@@ -139,16 +160,20 @@ Player::Player(){
                             }
                         }
                     }   else {
+                            //Says the boat is overlapping another ship
                             std::cout << Ships[counter].GetName() << " overlaps another ship, please try again" <<std::endl;
                             DirectionValid = false;
                             overlap = false;
                             rightvalid = false;
                     }
                 } else {
+                        //Says the boat will go outside of the board
                         std::cout << Ships[counter].GetName() << " goes outside the range of the board, please try again" <<std::endl;
                         DirectionValid = false;
                         rightvalid = false;
                 }
+
+            //Places the boat in the left direction, in the exact same manner as above but changed as required to put the boat to the left
             } else if (direction == "l") {
                 if(x - Ships[counter].GetLength() > -2) {
                     for (int i = 0; i < Ships[counter].GetLength(); i++) {
@@ -199,6 +224,8 @@ Player::Player(){
                             DirectionValid = false;
                             leftvalid = false;
                         }
+
+            //Places the boat in the down direction, in the exact same manner as above but changed as required to put the boat to the down
             } else if (direction == "d") {
                 if(y + Ships[counter].GetLength() < 11) {
                     for (int i = 0; i < Ships[counter].GetLength(); i++) {
@@ -249,6 +276,8 @@ Player::Player(){
                             DirectionValid = false;
                             downvalid = false;
                         }
+
+            //Places the boat in the up direction, in the exact same manner as above but changed as required to put the boat to the up
             } else if (direction == "u") {
                 if(y - Ships[counter].GetLength() > -2) {
                     for (int i = 0; i < Ships[counter].GetLength(); i++) {
@@ -301,6 +330,7 @@ Player::Player(){
                         }
             }
         }
+        //If there are no valid placement directions (ie the boat is stuck) it says the boat is stuck and resets asking once again
         if (rightvalid == false && leftvalid == false && upvalid == false && downvalid == false) {
             std::cout << "Your ship is trapped and cannot go here" << std::endl;
             xvalid = false;
