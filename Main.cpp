@@ -70,7 +70,7 @@ int main() {
         choicevalid = true;
         while (choicevalid == true) {
             std::cin >> choice;
-            if(choice == "f" || choice  == "sr") {
+            if(choice == "f" || choice  == "s") {
                 choicevalid = false;
             } else {
                 std::cout << "Invalid choice please try again" << std::endl;
