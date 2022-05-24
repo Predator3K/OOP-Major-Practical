@@ -9,12 +9,16 @@ Player::Player(){
 
     std::string x1 = "";
     std::string y1 = "";
+    std::string direction = "";
 
     int x = 0;
     int y = 0;
 
     bool xvalid = true;
     bool yvalid = true;
+    bool DirectionValid = false;
+
+    bool overlap = false;
 
     int counter = 0;
 
@@ -35,8 +39,8 @@ Player::Player(){
                 std::cout << "Invalid input: please input a number between 0 to 9" << std::endl;
             }
         }
+        std::cout << "Please input the y-coordinate for "<<Ships[counter].GetName() << " between 0 and 9" << std::endl;
         if(xvalid == true) {
-            std::cout << "Please input the y-coordinate for "<<Ships[counter].GetName() << " between 0 and 9" << std::endl;
             std::cin >> y1;
             for(int i = 0; i < y1.length(); i++) {
                 if(isdigit(y1[i]) == false) {
@@ -54,46 +58,196 @@ Player::Player(){
             }
         }
         if(xvalid == true && yvalid == true) {
-            if(x + Ships[counter].GetLength() < 11) {
-                for(int i = x; i < x+Ships[counter].GetLength();i ++) {
-                    Ships[counter].WriteShipData(i-x+1,i,y);
-                }
-                for(int i=0;i<10;i++){
-                    for(int j=0;j<10;j++){
-                        for(int k=0;k<counter+1;k++){
-                            for(int m = 0; m < Ships[k].GetLength(); m++) {
-                                if(Ships[k].ReturnCoords(m+1) == i + j*10) {
-                                    ShipBoard[j][i] = k+1;
+            if (ShipBoard[x][y] != 0) {
+                overlap = true;
+            }
+        }
+        if (overlap == true) {
+            std::cout << Ships[counter].GetName() << " overlaps another ship, please try again" <<std::endl;
+        }
+        if (xvalid == true && yvalid == true && overlap == false) {
+            std::cout << "Please input a direction you would like the ship to go: Up (u), Down (d), Left (l) or Right (r)" << std::endl;
+            while (DirectionValid == false) {
+                    std::cin >> direction;
+                    if (direction == "u" || direction == "d" || direction == "r" || direction == "l") {
+                        DirectionValid = true;
+                    } else {
+                        std::cout << "Invalid direction please try again" << std::endl;
+                    }
+            }
+        }
+        if(xvalid == true && yvalid == true && overlap == false) {
+            if (direction == "r") {
+                if(x + Ships[counter].GetLength() < 11) {
+                    for (int i = 0; i < Ships[counter].GetLength(); i++) {
+                        if (ShipBoard[x+i][y] != 0) {
+                            overlap = true;
+                        }
+                    }
+                    if (overlap == false) {
+                        for(int i = x; i < x+Ships[counter].GetLength();i ++) {
+                            Ships[counter].WriteShipData(i-x+1,i,y);
+                        }
+                        for(int i=0;i<10;i++){
+                            for(int j=0;j<10;j++){
+                                for(int m = 0; m < Ships[counter].GetLength(); m++) {
+                                    if(Ships[counter].ReturnCoords(m+1) == i + j*10) {
+                                        ShipBoard[j][i] = counter+1;
+                                    }
                                 }
                             }
                         }
-                    }
-                }
-                counter++;
-                if (counter < 5) {
-                    std::cout << "  0 1 2 3 4 5 6 7 8 9" << std::endl;
-                    for(int i = 0; i < 10; i++) {
-                        std::cout << i << " ";
-                        for(int j = 0; j < 10; j++){
-                            if(ShipBoard[j][i] == 0)
-                                std::cout << "- ";
-                            else {
-                            std::cout << ShipBoard[j][i] << " ";
+                        counter++;
+                        if (counter < 5) {
+                            std::cout << "  0 1 2 3 4 5 6 7 8 9" << std::endl;
+                            for(int i = 0; i < 10; i++) {
+                                std::cout << i << " ";
+                                for(int j = 0; j < 10; j++){
+                                    if(ShipBoard[j][i] == 0)
+                                        std::cout << "- ";
+                                    else {
+                                    std::cout << ShipBoard[j][i] << " ";
+                                    }
+                                }
+                                std::cout << std::endl;
                             }
                         }
-                        std::cout << std::endl;
+                    }   else {
+                            std::cout << Ships[counter].GetName() << " overlaps another ship, please try again" <<std::endl;
                     }
+                } else {
+                        std::cout << Ships[counter].GetName() << " goes outside the range of the board, please try again" <<std::endl;
                 }
-            } else {
-                std::cout << Ships[counter].GetName() << " goes outside the range of the board, please try again" <<std::endl;
+            } else if (direction == "l") {
+                if(x - Ships[counter].GetLength() > -2) {
+                    for (int i = 0; i < Ships[counter].GetLength(); i++) {
+                        if (ShipBoard[x-i][y] != 0) {
+                            overlap = true;
+                        }
+                    }
+                    if (overlap == false) {
+                        for(int i = x; i < x + Ships[counter].GetLength(); i++) {
+                            Ships[counter].WriteShipData(i-x+1,i,y);
+                        }
+                        for(int i=0;i<10;i++){
+                            for(int j=0;j<10;j++){
+                                for(int m = 0; m < Ships[counter].GetLength(); m++) {
+                                    if(Ships[counter].ReturnCoords(m+1) == i + j*10) {
+                                        ShipBoard[j-Ships[counter].GetLength()+1][i] = counter+1;
+                                    }
+                                }
+                            }
+                        }
+                        counter++;
+                        if (counter < 5) {
+                            std::cout << "  0 1 2 3 4 5 6 7 8 9" << std::endl;
+                            for(int i = 0; i < 10; i++) {
+                                std::cout << i << " ";
+                                for(int j = 0; j < 10; j++){
+                                    if(ShipBoard[j][i] == 0)
+                                        std::cout << "- ";
+                                    else {
+                                    std::cout << ShipBoard[j][i] << " ";
+                                    }
+                                }
+                                std::cout << std::endl;
+                            }
+                        }
+                    } else {
+                        std::cout << Ships[counter].GetName() << " overlaps another ship, please try again" <<std::endl;
+                    }
+                }   else {
+                            std::cout << Ships[counter].GetName() << " goes outside the range of the board, please try again" <<std::endl;
+                        }
+            } else if (direction == "d") {
+                if(y + Ships[counter].GetLength() < 11) {
+                    for (int i = 0; i < Ships[counter].GetLength(); i++) {
+                        if (ShipBoard[x][y+i] != 0) {
+                            overlap = true;
+                        }
+                    }
+                    if (overlap == false) {
+                        for(int i = y; i < y + Ships[counter].GetLength(); i++) {
+                            Ships[counter].WriteShipData(i-y+1,x,i);
+                        }
+                        for(int i=0;i<10;i++){
+                            for(int j=0;j<10;j++){
+                                for(int m = 0; m < Ships[counter].GetLength(); m++) {
+                                    if(Ships[counter].ReturnCoords(m+1) == i + j*10) {
+                                        ShipBoard[j][i] = counter+1;
+                                    }
+                                }
+                            }
+                        }
+                        counter++;
+                        if (counter < 5) {
+                            std::cout << "  0 1 2 3 4 5 6 7 8 9" << std::endl;
+                            for(int i = 0; i < 10; i++) {
+                                std::cout << i << " ";
+                                for(int j = 0; j < 10; j++){
+                                    if(ShipBoard[j][i] == 0)
+                                        std::cout << "- ";
+                                    else {
+                                    std::cout << ShipBoard[j][i] << " ";
+                                    }
+                                }
+                                std::cout << std::endl;
+                            }
+                        }
+                    } else {
+                        std::cout << Ships[counter].GetName() << " overlaps another ship, please try again" <<std::endl;
+                    }
+                }   else {
+                            std::cout << Ships[counter].GetName() << " goes outside the range of the board, please try again" <<std::endl;
+                        }
+            } else if (direction == "u") {
+                if(y - Ships[counter].GetLength() > -2) {
+                    for (int i = 0; i < Ships[counter].GetLength(); i++) {
+                        if (ShipBoard[x][y-i] != 0) {
+                            overlap = true;
+                        }
+                    }
+                    if (overlap == false) {
+                        for(int i = y; i < y + Ships[counter].GetLength(); i++) {
+                            Ships[counter].WriteShipData(i-y+1,x,i);
+                        }
+                        for(int i=0;i<10;i++){
+                            for(int j=0;j<10;j++){
+                                for(int m = 0; m < Ships[counter].GetLength(); m++) {
+                                    if(Ships[counter].ReturnCoords(m+1) == i + j*10) {
+                                        ShipBoard[j][i-Ships[counter].GetLength()+1] = counter+1;
+                                    }
+                                }
+                            }
+                        }
+                        counter++;
+                        if (counter < 5) {
+                            std::cout << "  0 1 2 3 4 5 6 7 8 9" << std::endl;
+                            for(int i = 0; i < 10; i++) {
+                                std::cout << i << " ";
+                                for(int j = 0; j < 10; j++){
+                                    if(ShipBoard[j][i] == 0)
+                                        std::cout << "- ";
+                                    else {
+                                    std::cout << ShipBoard[j][i] << " ";
+                                    }
+                                }
+                                std::cout << std::endl;
+                            }
+                        }
+                } else {
+                        std::cout << Ships[counter].GetName() << " overlaps another ship, please try again" <<std::endl;
+                    }
+                }   else {
+                            std::cout << Ships[counter].GetName() << " goes outside the range of the board, please try again" <<std::endl;
+                        }
             }
         }
         xvalid = true;
         yvalid = true;
+        overlap = false;
+        DirectionValid = false;
     }
-
-
-
 }
 
 void Player::Move(User* opponent){
