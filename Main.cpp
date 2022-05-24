@@ -7,9 +7,17 @@
 int main() {
 
     std::string choice;
+    bool choicevalid = true;
 
     std::cout << "Do you want to play against another player, against a computer or watch computer v computer? (player, computer, cvc)" << std::endl;
-    std::cin >> choice;
+    while (choicevalid == true) {
+        std::cin >> choice;
+        if(choice == "player" || choice  == "computer" || choice == "cvc") {
+            choicevalid = false;
+        } else {
+            std::cout << "Invalid choice please try again" << std::endl;
+        }
+    }
 
     if (choice == "player") {
         User* Player1 = new Player;

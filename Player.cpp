@@ -353,25 +353,32 @@ void Player::Move(User* opponent){
     int x = 0;
     int y = 0;
 
-    bool xvalid = true;
-    bool yvalid = true;
+    bool xvalid = false;
+    bool yvalid = false;
 
     bool z = true;
     while (z) {
-        std::cout<< "Please input the x-coordinate between 0 to 9 to hit (Or 10 to Quit)" <<std::endl;
-        std::cin>> x1;
-        for(int i = 0; i < x1.length(); i++) {
-            if(isdigit(x1[i]) == false) {
-                xvalid = false;
-                std::cout << "Invalid input: please input a number between 0 to 9 or 10 to quit" << std::endl;
-                break;
+
+        //Takes in the users x coordinate and checks if it is an integer, if not it asks again
+        if (xvalid == false) {
+            std::cout << "Please input the x-coordinate between 0 to 9 to hit, or 10 to quit" << std::endl;
+            std::cin >> x1;
+            for(int i = 0; i < x1.length(); i++) {
+                if(isdigit(x1[i]) == false) {
+                    std::cout << "Invalid input: please input a number between 0 to 9, or 10 to quit" << std::endl;
+                    break;
+                } else {
+                    xvalid = true;
+                }
             }
         }
+
+        //If the x input is a number, checks if it is between 0 and 9, if not it asks again
         if(xvalid == true) {
             x = std::stoi(x1);
             if (x < 0 || x > 10) {
                 xvalid = false;
-                std::cout << "Invalid input: please input a number between 0 to 9 or 10 to quit" << std::endl;
+                std::cout << "Invalid input: please input a number between 0 to 9, or 10 to quit" << std::endl;
             }
         }
         if(xvalid == true && x == 10) {
@@ -381,17 +388,22 @@ void Player::Move(User* opponent){
             }
             return;
         }
-        if(xvalid == true) {
-            std::cout<< "Please input the y-coordinate between 0 to 9 to hit" <<std::endl;
+
+       //If the x input is valid, asks for the y input, and if it is not an integer asks again
+        if(xvalid == true && yvalid == false) {
+            std::cout << "Please input the y-coordinate between 0 to 9 to hit" << std::endl;
             std::cin >> y1;
             for(int i = 0; i < y1.length(); i++) {
                 if(isdigit(y1[i]) == false) {
-                    yvalid = false;
                     std::cout << "Invalid input: please input a number between 0 to 9" << std::endl;
                     break;
+                } else {
+                    yvalid = true;
                 }
             }
         }
+
+        //If the y input is valid, checks if it is between 0 and 9, if not it asks again
         if(xvalid == true && yvalid == true) {
             y = std::stoi(y1);
             if (y < 0 || y > 9) {
@@ -399,6 +411,7 @@ void Player::Move(User* opponent){
                 std::cout << "Invalid input: please input a number between 0 to 9" << std::endl;
             }
         }
+
         if(xvalid == true && yvalid == true) {
             if(HitBoard[x][y] == 0){
                 for(int i=0;i<5;i++) {
@@ -411,12 +424,14 @@ void Player::Move(User* opponent){
                     }
                 }
                 z = false;
+                xvalid = true;
+                yvalid = true;
             } else {
                 std::cout<< "Please put in coordinates you have not hit" <<std::endl;
+                xvalid = true;
+                yvalid = true;
             }
         }
-        xvalid = true;
-        yvalid = true;
     }
     return;
 }
