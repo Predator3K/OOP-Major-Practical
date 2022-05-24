@@ -65,8 +65,17 @@ int main() {
         delete Computer1;
 
     } else if (choice == "cvc") {
+
         std::cout << "Do you want to see a fast game or slow game (f or s)" << std::endl;
-        std::cin >> choice;
+        choicevalid = true;
+        while (choicevalid == true) {
+            std::cin >> choice;
+            if(choice == "f" || choice  == "sr") {
+                choicevalid = false;
+            } else {
+                std::cout << "Invalid choice please try again" << std::endl;
+            }
+        }
             if (choice == "f") {
                 User* Computer1 = new Computer;
                 User* Computer2 = new Computer;
