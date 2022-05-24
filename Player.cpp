@@ -7,31 +7,47 @@ using namespace std;
 
 Player::Player(){
 
+    //Holds the users input x, y and direction
     std::string x1 = "";
     std::string y1 = "";
     std::string direction = "";
 
+    //Holds the users input x and y when they are integers
     int x = 0;
     int y = 0;
 
-    bool xvalid = true;
-    bool yvalid = true;
+    //Used for checking if the x, y, direction and overlap are valid
+    bool xvalid = false;
+    bool yvalid = false;
     bool DirectionValid = false;
-
     bool overlap = false;
 
+    bool leftvalid = true;
+    bool rightvalid = true;
+    bool upvalid = true;
+    bool downvalid = true;
+
+    //Used to loop over all the boats
     int counter = 0;
 
+    //Loops through all the boats
     while (counter < 5) {
-        std::cout << "Please input the x-coordinate for " << Ships[counter].GetName() << " between 0 and 9" << std::endl;
-        std::cin >> x1;
-        for(int i = 0; i < x1.length(); i++) {
-            if(isdigit(x1[i]) == false) {
-                xvalid = false;
-                std::cout << "Invalid input: please input a number between 0 to 9" << std::endl;
-                break;
+
+        //Takes in the users x coordinate and checks if it is an integer, if not it asks again
+        if (xvalid == false) {
+            std::cout << "Please input the x-coordinate for " << Ships[counter].GetName() << " between 0 and 9" << std::endl;
+            std::cin >> x1;
+            for(int i = 0; i < x1.length(); i++) {
+                if(isdigit(x1[i]) == false) {
+                    std::cout << "Invalid input: please input a number between 0 to 9" << std::endl;
+                    break;
+                } else {
+                    xvalid = true;
+                }
             }
         }
+
+        //If the x input is a number, checks if it is between 0 and 9, if not it asks again
         if(xvalid == true) {
             x = std::stoi(x1);
             if (x < 0 || x > 9) {
@@ -39,17 +55,20 @@ Player::Player(){
                 std::cout << "Invalid input: please input a number between 0 to 9" << std::endl;
             }
         }
-        std::cout << "Please input the y-coordinate for "<<Ships[counter].GetName() << " between 0 and 9" << std::endl;
-        if(xvalid == true) {
+        //If the x input is valid, asks for the y input, and if it is not an integer asks again
+        if(xvalid == true && yvalid == false) {
+            std::cout << "Please input the y-coordinate for "<<Ships[counter].GetName() << " between 0 and 9" << std::endl;
             std::cin >> y1;
             for(int i = 0; i < y1.length(); i++) {
                 if(isdigit(y1[i]) == false) {
-                    yvalid = false;
                     std::cout << "Invalid input: please input a number between 0 to 9" << std::endl;
                     break;
+                } else {
+                    yvalid = true;
                 }
             }
         }
+        //If the y input is valid, checks if it is between 0 and 9, if not it asks again
         if(xvalid == true && yvalid == true) {
             y = std::stoi(y1);
             if (y < 0 || y > 9) {
@@ -59,7 +78,10 @@ Player::Player(){
         }
         if(xvalid == true && yvalid == true) {
             if (ShipBoard[x][y] != 0) {
+                std::cout << "Checked overlap" << std::endl;
                 overlap = true;
+                xvalid = false;
+                yvalid = false;
             }
         }
         if (overlap == true) {
@@ -88,6 +110,10 @@ Player::Player(){
                         for(int i = x; i < x+Ships[counter].GetLength();i ++) {
                             Ships[counter].WriteShipData(i-x+1,i,y);
                         }
+                        xvalid = false;
+                        yvalid = false;
+                        overlap = false;
+                        DirectionValid = false;
                         for(int i=0;i<10;i++){
                             for(int j=0;j<10;j++){
                                 for(int m = 0; m < Ships[counter].GetLength(); m++) {
@@ -114,9 +140,14 @@ Player::Player(){
                         }
                     }   else {
                             std::cout << Ships[counter].GetName() << " overlaps another ship, please try again" <<std::endl;
+                            DirectionValid = false;
+                            overlap = false;
+                            rightvalid = false;
                     }
                 } else {
                         std::cout << Ships[counter].GetName() << " goes outside the range of the board, please try again" <<std::endl;
+                        DirectionValid = false;
+                        rightvalid = false;
                 }
             } else if (direction == "l") {
                 if(x - Ships[counter].GetLength() > -2) {
@@ -129,6 +160,10 @@ Player::Player(){
                         for(int i = x; i < x + Ships[counter].GetLength(); i++) {
                             Ships[counter].WriteShipData(i-x+1,i,y);
                         }
+                        xvalid = false;
+                        yvalid = false;
+                        overlap = false;
+                        DirectionValid = false;
                         for(int i=0;i<10;i++){
                             for(int j=0;j<10;j++){
                                 for(int m = 0; m < Ships[counter].GetLength(); m++) {
@@ -155,9 +190,14 @@ Player::Player(){
                         }
                     } else {
                         std::cout << Ships[counter].GetName() << " overlaps another ship, please try again" <<std::endl;
+                        DirectionValid = false;
+                        overlap = false;
+                        leftvalid = false;
                     }
                 }   else {
                             std::cout << Ships[counter].GetName() << " goes outside the range of the board, please try again" <<std::endl;
+                            DirectionValid = false;
+                            leftvalid = false;
                         }
             } else if (direction == "d") {
                 if(y + Ships[counter].GetLength() < 11) {
@@ -170,6 +210,10 @@ Player::Player(){
                         for(int i = y; i < y + Ships[counter].GetLength(); i++) {
                             Ships[counter].WriteShipData(i-y+1,x,i);
                         }
+                        xvalid = false;
+                        yvalid = false;
+                        overlap = false;
+                        DirectionValid = false;
                         for(int i=0;i<10;i++){
                             for(int j=0;j<10;j++){
                                 for(int m = 0; m < Ships[counter].GetLength(); m++) {
@@ -196,9 +240,14 @@ Player::Player(){
                         }
                     } else {
                         std::cout << Ships[counter].GetName() << " overlaps another ship, please try again" <<std::endl;
+                        DirectionValid = false;
+                        overlap = false;
+                        downvalid = false;
                     }
                 }   else {
                             std::cout << Ships[counter].GetName() << " goes outside the range of the board, please try again" <<std::endl;
+                            DirectionValid = false;
+                            downvalid = false;
                         }
             } else if (direction == "u") {
                 if(y - Ships[counter].GetLength() > -2) {
@@ -211,6 +260,10 @@ Player::Player(){
                         for(int i = y; i < y + Ships[counter].GetLength(); i++) {
                             Ships[counter].WriteShipData(i-y+1,x,i);
                         }
+                        xvalid = false;
+                        yvalid = false;
+                        overlap = false;
+                        DirectionValid = false;
                         for(int i=0;i<10;i++){
                             for(int j=0;j<10;j++){
                                 for(int m = 0; m < Ships[counter].GetLength(); m++) {
@@ -237,16 +290,28 @@ Player::Player(){
                         }
                 } else {
                         std::cout << Ships[counter].GetName() << " overlaps another ship, please try again" <<std::endl;
+                        DirectionValid = false;
+                        overlap = false;
+                        upvalid = false;
                     }
                 }   else {
                             std::cout << Ships[counter].GetName() << " goes outside the range of the board, please try again" <<std::endl;
+                            DirectionValid = false;
+                            upvalid = false;
                         }
             }
         }
-        xvalid = true;
-        yvalid = true;
-        overlap = false;
-        DirectionValid = false;
+        if (rightvalid == false && leftvalid == false && upvalid == false && downvalid == false) {
+            std::cout << "Your ship is trapped and cannot go here" << std::endl;
+            xvalid = false;
+            yvalid = false;
+            DirectionValid = false;
+            overlap = false;
+            leftvalid = true;
+            rightvalid = true;
+            upvalid = true;
+            downvalid = true;
+        }
     }
 }
 
