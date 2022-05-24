@@ -83,15 +83,14 @@ Player::Player(){
         //If the x and y inputs are valid, checks if that current spot has a boat at it already, and if it does says it overlaps
         if(xvalid == true && yvalid == true) {
             if (ShipBoard[x][y] != 0) {
-                 std::cout << Ships[counter].GetName() << " overlaps another ship, please try again" <<std::endl;
-                overlap = true;
+                std::cout << Ships[counter].GetName() << " overlaps another ship, please try again" <<std::endl;
                 xvalid = false;
                 yvalid = false;
             }
         }
 
         //If the coordinates are valid and there is no current overlap, asks the user for which direction they'd like to place in. If this is invalid, it asks again
-        if (xvalid == true && yvalid == true && overlap == false) {
+        if (xvalid == true && yvalid == true) {
             std::cout << "Please input a direction you would like the ship to go: Up (u), Down (d), Left (l) or Right (r)" << std::endl;
             while (DirectionValid == false) {
                     std::cin >> direction;
@@ -104,7 +103,7 @@ Player::Player(){
         }
 
         //If the coordinates are valid and there is no current overlap, asks the user to pick a direction to place the boat in
-        if(xvalid == true && yvalid == true && overlap == false) {
+        if(xvalid == true && yvalid == true) {
 
             //Places the boat in the right direction
             if (direction == "r") {
@@ -287,7 +286,7 @@ Player::Player(){
                     }
                     if (overlap == false) {
                         for(int i = y; i < y + Ships[counter].GetLength(); i++) {
-                            Ships[counter].WriteShipData(i-y+1,x,i);
+                            Ships[counter].WriteShipData(i-y+1,x,2*y-i);
                         }
                         xvalid = false;
                         yvalid = false;
@@ -297,7 +296,7 @@ Player::Player(){
                             for(int j=0;j<10;j++){
                                 for(int m = 0; m < Ships[counter].GetLength(); m++) {
                                     if(Ships[counter].ReturnCoords(m+1) == i + j*10) {
-                                        ShipBoard[j][i-Ships[counter].GetLength()+1] = counter+1;
+                                        ShipBoard[j][i] = counter+1;
                                     }
                                 }
                             }
