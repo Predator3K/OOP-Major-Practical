@@ -7,16 +7,13 @@
 User::User() {
     memset(ShipBoard, 0, sizeof(ShipBoard));
     start = std::chrono::system_clock::now();
-    Ships = new Ship[8];
+    Ships = new Ship[5];
 
     new(&Ships[0]) Ship("Flagship", 6);
     new(&Ships[1]) Ship("Destroyer", 5);
     new(&Ships[2]) Ship("Carrier", 4);
-    new(&Ships[3]) Ship("Carrier", 4);
-    new(&Ships[4]) Ship("Submarine", 3);
-    new(&Ships[5]) Ship("Submarine", 3);
-    new(&Ships[6]) Ship("Scout Boat", 2);
-    new(&Ships[7]) Ship("Scout Boat", 2);
+    new(&Ships[3]) Ship("Submarine", 3);
+    new(&Ships[4]) Ship("Scout Boat", 2);
 
     HitBoard = new int*[10];
         for (int i = 0; i < 10; i++) {
@@ -40,13 +37,13 @@ int** User::GetHitBoard() {
 
 bool User::WinCondition(User* opponent) {
     int ShipsSunk = 0;
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 5; i++) {
             if ((*opponent).Ships[i].IsSunk() == true) {
                 ShipsSunk++;
         }
     }
 
-    if (ShipsSunk == 8) {
+    if (ShipsSunk == 5) {
         return true;
     }
 
