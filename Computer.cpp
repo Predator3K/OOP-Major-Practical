@@ -87,9 +87,9 @@ void Computer::DisplayBoard(User* opponent){
     for(int i=0;i<10;i++){
         std::cout << i << " ";
         for (int m = 0; m < 10; m++) {
-            if(HitBoard[m][i] == 0)
+            if(HitBoard[i][m] == 0)
                 std::cout << "- ";
-            else if(HitBoard[m][i] == 1)
+            else if(HitBoard[i][m] == 1)
                 std::cout << "O ";
             else {
                 std::cout << "X ";
@@ -105,9 +105,9 @@ void Computer::DisplayBoard(User* opponent){
         }
         std::cout << "| ";
         for (int m = 0; m < 10; m++) {
-            if(((*opponent).GetHitBoard())[m][i] == 0)
+            if(((*opponent).GetHitBoard())[i][m] == 0)
                 std::cout << "- ";
-            else if(((*opponent).GetHitBoard())[m][i] == 1)
+            else if(((*opponent).GetHitBoard())[i][m] == 1)
                 std::cout << "O ";
             else {
                 std::cout << "X ";

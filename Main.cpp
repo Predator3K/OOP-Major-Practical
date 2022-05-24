@@ -24,19 +24,23 @@ int main() {
         User* Player2 = new Player;
 
         while(Player2->WinCondition(Player1) != true) {
+            Player1->GameTimer();
             Player1->DisplayBoard(Player2);
             Player1->Move(Player2);
             if(Player1->WinCondition(Player2) == true) {
                 break;
             }
+            Player2->GameTimer();
             Player2->DisplayBoard(Player1);
             Player2->Move(Player1);
         }
 
         if(Player2->WinCondition(Player1) == true) {
             std::cout << "Player 2 has won!" << std::endl;
+            Player1->GameTimer();
         } else {
             std::cout << "Player 1 has won!" << std::endl;
+            Player1->GameTimer();
         }
 
         delete Player1;
@@ -47,6 +51,7 @@ int main() {
         User* Computer1 = new Computer;
 
         while(Computer1->WinCondition(Player1) != true) {
+            Player1->GameTimer();
             Player1->DisplayBoard(Computer1);
             Player1->Move(Computer1);
             if(Player1->WinCondition(Computer1) == true) {
@@ -57,8 +62,10 @@ int main() {
 
         if(Computer1->WinCondition(Player1) == true) {
             std::cout << "Computer has won!" << std::endl;
+            Computer1->GameTimer();
         } else {
             std::cout << "You have won!" << std::endl;
+            Computer1->GameTimer();
         }
 
         delete Player1;
@@ -96,8 +103,10 @@ int main() {
 
                 if(Computer2->WinCondition(Computer1) == true) {
                     std::cout << "Computer 2 has won!" << std::endl;
+                    Computer1->GameTimer();
                 } else {
                     std::cout << "Computer 1 has won!" << std::endl;
+                    Computer1->GameTimer();
                 }
 
                 delete Computer1;
@@ -109,6 +118,7 @@ int main() {
 
                 while(Computer2->WinCondition(Computer1) != true) {
                     std::this_thread::sleep_for (std::chrono::milliseconds(1000));
+                    Computer1->GameTimer();
                     std::cout << "Computer 1 board:" << std::endl;
                     Computer1->DisplayBoard(Computer2);
                     std::cout << "Computer 1 move:" << std::endl;
@@ -117,6 +127,7 @@ int main() {
                         break;
                     }
                     std::this_thread::sleep_for (std::chrono::milliseconds(1000));
+                    Computer1->GameTimer();
                     std::cout << "Computer 2 board:" << std::endl;
                     Computer2->DisplayBoard(Computer1);
                     std::cout << "Computer 2 move:" << std::endl;
@@ -125,8 +136,10 @@ int main() {
 
                 if(Computer2->WinCondition(Computer1) == true) {
                     std::cout << "Computer 2 has won!" << std::endl;
+                    Computer1->GameTimer();
                 } else {
                     std::cout << "Computer 1 has won!" << std::endl;
+                    Computer1->GameTimer();
                 }
 
                 delete Computer1;

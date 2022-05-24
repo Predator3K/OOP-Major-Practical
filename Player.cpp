@@ -183,7 +183,7 @@ Player::Player(){
                     }
                     if (overlap == false) {
                         for(int i = x; i < x + Ships[counter].GetLength(); i++) {
-                            Ships[counter].WriteShipData(i-x+1,i,y);
+                            Ships[counter].WriteShipData(i-x+1,2*x-i,y);
                         }
                         xvalid = false;
                         yvalid = false;
@@ -193,7 +193,7 @@ Player::Player(){
                             for(int j=0;j<10;j++){
                                 for(int m = 0; m < Ships[counter].GetLength(); m++) {
                                     if(Ships[counter].ReturnCoords(m+1) == i + j*10) {
-                                        ShipBoard[j-Ships[counter].GetLength()+1][i] = counter+1;
+                                        ShipBoard[j][i] = counter+1;
                                     }
                                 }
                             }

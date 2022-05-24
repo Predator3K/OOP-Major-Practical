@@ -13,5 +13,5 @@ TestUser: Ship.cpp User.cpp TestUser.cpp
 	./TestUser
 
 Game: Ship.cpp User.cpp Player.cpp Computer.cpp Main.cpp
-	$(CC) Ship.cpp User.cpp Player.cpp Computer.cpp Main.cpp -o Game $(FLAGS)
+	$(CC) Ship.cpp User.cpp Player.cpp Computer.cpp Main.cpp -o Game
 	./Game

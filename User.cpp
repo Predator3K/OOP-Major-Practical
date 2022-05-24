@@ -53,9 +53,8 @@ bool User::WinCondition(User* opponent) {
 int User::GameTimer(){
     std::chrono::time_point<std::chrono::system_clock> end;
     end = std::chrono::system_clock::now();
-    std::chrono::duration<double> elapsed_seconds = end - start;
-    std::time_t end_time = std::chrono::system_clock::to_time_t(end);
-    std::cout << "time passed: " << elapsed_seconds.count() << "s\n";
+    std::chrono::duration<double> elapsed_seconds = end - start;\
+    std::cout << "Time passed: " << elapsed_seconds.count() << "s\n";
     return 0;
 }
 
